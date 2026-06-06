@@ -303,3 +303,10 @@ body.light .timer-text {
     box-shadow: 0 0 25px rgba(159, 199, 179, 0.45);
   }
 }
+.footer {
+  margin-top: 40px;
+  padding: 20px;
+  text-align: center;
+  font-size: 14px;
+  opacity: 0.8;
+}

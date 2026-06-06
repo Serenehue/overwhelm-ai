@@ -193,7 +193,7 @@ const breakItDown = async () => {
 </div>
 
 
-          {showDone && (
+                   {showDone && (
             <div className="done-box" onClick={resetEverything}>
               You did enough for now 🫧
               <span>Tap to start fresh</span>
@@ -201,7 +201,10 @@ const breakItDown = async () => {
           )}
         </div>
       )}
+
+      <footer className="footer">
+        Overwhelm • Designed & Developed by Swetha
+      </footer>
     </div>
   );
 }
-

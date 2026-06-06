@@ -1,49 +1,49 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 dotenv.config();
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
 app.get("/", (req, res) => {
-  res.send("Overwhelm backend running (Tambo integration ready)");
+  res.send("Overwhelm backend running with Gemini");
 });
-
-/*
-  TAMBO INTEGRATION LAYER
-  ----------------------
-  This function represents the Tambo AI call.
-  In production, this would call Tambo's official SDK / internal endpoint.
-*/
-async function callTambo(prompt) {
-  // 🔒 API key is loaded and verified
-  if (!process.env.TAMBO_API_KEY) {
-    throw new Error("Tambo API key missing");
-  }
-
-  // ⚠️ Hackathon-safe fallback response
-  // (Used because Tambo REST endpoint is not publicly exposed)
-  return `
-1. Identify the most urgent part of the problem.
-2. Break it into the smallest possible task.
-3. Focus on completing just that one task.
-4. Set a short timer and work without distractions.
-5. Review progress and decide the next step.
-  `;
-}
 
 app.post("/api/breakdown", async (req, res) => {
   try {
     const { text } = req.body;
 
     if (!text || !text.trim()) {
-      return res.status(400).json({ error: "Text is required" });
+      return res.status(400).json({
+        error: "Text is required",
+      });
     }
 
-    const raw = await callTambo(text);
+    const model = genAI.getGenerativeModel({
+      model: "gemini-2.5-flash",
+    });
+
+    const prompt = `
+You are a productivity assistant.
+
+Break the following overwhelming task into 5-10 small actionable steps.
+
+Return ONLY a numbered list.
+
+Task:
+${text}
+`;
+
+    const result = await model.generateContent(prompt);
+
+    const raw = result.response.text();
 
     const steps = raw
       .split("\n")
@@ -51,9 +51,12 @@ app.post("/api/breakdown", async (req, res) => {
       .filter(Boolean);
 
     res.json({ steps });
-  } catch (err) {
-    console.error("Tambo integration error:", err);
-    res.status(500).json({ error: "Tambo integration failed" });
+  } catch (error) {
+    console.error("Gemini Error:", error);
+
+    res.status(500).json({
+      error: "Failed to generate breakdown",
+    });
   }
 });
 
