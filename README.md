@@ -1,18 +1,65 @@
-# React + Vite
+# Overwhelm AI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Overwhelm AI is an Ai powered productivity app that helps users break overwhelming tasks into clear, actionable steps.
 
-Currently, two official plugins are available:
+Built with React, Express, and Google's Gemini AI, the app transforms mental overload into a structured plan and includes a built-in focus timer to help users get started immediately.
+## Features
+* AI-powered task breakdown using Gemini AI
+* Interactive task checklist
+* 25-minute focus timer
+* Light/Dark mode
+* Progress tracking
+* Clean and minimal user interface
+## Tech Stack
+### Frontend
+* React
+* Vite
+* CSS
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Backend
 
-## React Compiler
+* Express.js
+* Node.js
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+### AI
 
-Note: This will impact Vite dev & build performances.
+* Google Gemini API
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Install dependencies
+
+Frontend:
+
+```bash
+npm install
+```
+
+Backend:
+
+```bash
+cd backend
+npm install
+```
+### Configure environment variables
+Create `backend/.env`:
+```env
+PORT=3001
+GEMINI_API_KEY=YOUR_API_KEY
+```
+### Run the application
+Backend:
+```bash
+cd backend
+node server.js
+```
+Frontend:
+```bash
+npm run dev
+```
+## Project Goal
+Many people know what they need to do but struggle when tasks feel too large or overwhelming. Overwhelm AI helps users take the first step by converting complex goals into manageable actions.
+
+
+Designed and developed by Lily.
+
