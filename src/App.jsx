@@ -118,14 +118,13 @@ const breakItDown = async () => {
         onChange={(e) => setText(e.target.value)}
       />
 
-      <button
+<button
   className="primary-btn"
   disabled={!text.trim() || loading}
   onClick={breakItDown}
 >
   {loading ? "Thinking..." : "Break it down"}
 </button>
-
 
       {showSteps && (
         <div className="card">
