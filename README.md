@@ -61,5 +61,5 @@ npm run dev
 Many people know what they need to do but struggle when tasks feel too large or overwhelming. Overwhelm AI helps users take the first step by converting complex goals into manageable actions.
 
 
-Designed and developed by Lily.
+Designed and developed by Swetha
 
